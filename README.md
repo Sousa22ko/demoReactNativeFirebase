@@ -1,0 +1,4 @@
+# demoReactNativeFirebase
+
+TOKEN : faIW_Q80asg:APA91bFwTF2nUE1ARetknKHK9caBRfnxvdAg6-wJYIFtG_F4oJOCS1PZlp5dRvmp2ghDAsLGJ9KF4Vh6e1R27ycSCggXqMMr6INeI99I3pX0WUUUjKbolp8ezlUOaUlgxqkOTpK14aqk
+serverToken: AIzaSyAQv9iuIrVJmmV-1AhqxMyRmKzTqTXpic8
