@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1091779646279",
+    "firebase_url": "https://denonotificationrn.firebaseio.com",
+    "project_id": "denonotificationrn",
+    "storage_bucket": "denonotificationrn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091779646279:android:d1052e2d640ea2e2347262",
+        "android_client_info": {
+          "package_name": "com.demonotification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091779646279-p2vb8vckon7jodvrqbjru1f1kng9pabj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLi5rydjDYw5ARIhWeaMNLTvReq7y6q8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091779646279-p2vb8vckon7jodvrqbjru1f1kng9pabj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
