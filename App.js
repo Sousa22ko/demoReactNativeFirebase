@@ -130,7 +130,10 @@ export default class App extends Component<Props> {
 
   state ={
     cep: "",
-    logradouro: ""
+    logradouro: "",
+    uf:"",
+    cidade:"",
+    bairro:""
   }
 
   handlerCep = (text) => {
@@ -138,19 +141,22 @@ export default class App extends Component<Props> {
   }  
 
   render() {
+    const bla = this.state.cidade ? `${this.state.cidade} - ${this.state.uf}` : '';
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-
         <TextInput style={{ width: 200, borderColor: 'gray', borderWidth: 1 }} keyboardType="number-pad" placeholder='CEP' value={this.state.cep} onChangeText={(text) => this.setState({cep:text})}/>
         <Button title="Procurar cep" onPress={() => {
           GET(this.state).then(res => {
-            console.log(res.data)
+            this.setState({cep: res.data.cep, logradouro: res.data.logradouro, cidade: res.data.localidade, uf:res.data.uf, bairro: res.data.bairro}, )
             // notify()
           })
         }} />
+
+      <Text style={styles.welcome}> {this.state.cep} </Text>
+      <Text style={styles.welcome}> {this.state.logradouro}</Text>
+      <Text style={styles.welcome}> {this.state.bairro}</Text>
+      <Text style={styles.welcome}> {bla}</Text>
 
       </View>
     );
