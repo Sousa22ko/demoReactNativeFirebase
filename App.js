@@ -74,22 +74,43 @@ export default class App extends Component<Props> {
       const { title, body } = notification;
       console.log('onNotification:');
 
-      const localNotification = new firebase.notifications.Notification({
-        sound: 'sampleaudio',
-        show_in_foreground: true,
-      })
-        .setSound('sampleaudio.wav')
-        .setNotificationId(notification.notificationId)
-        .setTitle(notification.title)
-        .setBody(notification.body)
-        .android.setChannelId('fcm_FirebaseNotifiction_default_channel') // e.g. the id you chose above
-        .android.setSmallIcon('@drawable/ic_launcher') // create this icon in Android Studio
-        .android.setColor('#000000') // you can set a color here
-        .android.setPriority(firebase.notifications.Android.Priority.High);
+      // const localNotification = new firebase.notifications.Notification({
+      //   sound: 'sampleaudio',
+      //   show_in_foreground: true,
+      // })
+      //   .setSound('sampleaudio.wav')
+      //   .setNotificationId(notification.notificationId)
+      //   .setTitle(notification.title)
+      //   .setBody(notification.body)
+      //   .android.setChannelId('fcm_FirebaseNotifiction_default_channel') // e.g. the id you chose above
+      //   .android.setSmallIcon('@drawable/ic_launcher') // create this icon in Android Studio
+      //   .android.setColor('#000000') // you can set a color here
+      //   .android.setPriority(firebase.notifications.Android.Priority.High);
 
-      firebase.notifications()
-        .displayNotification(localNotification)
-        .catch(err => console.error(err));
+      // firebase.notifications()
+      //   .displayNotification(localNotification)
+      //   .catch(err => console.error(err));
+
+      
+      const notificationTest = new firebase.notifications.Notification()
+      .setNotificationId(notification._notificationId)
+      .setTitle(notification.title) 
+      .setSound("default")
+      .setBody(notification.body)
+  
+    // if android
+    notificationTest
+      .android.setChannelId("fcm_FirebaseNotifiction_default_channel")
+      .android.setSmallIcon('@drawable/ic_launcher')
+      .android.setPriority(firebase.notifications.Android.Priority.High)
+      .android.setColor('#000000')
+      .android.setVibrate(500)
+  
+    
+    // show notification
+    firebase.notifications()
+      .displayNotification(notificationTest)
+      .catch(err => console.error(err));
     });
 
     const channel = new firebase.notifications.Android.Channel('fcm_FirebaseNotifiction_default_channel', 'Demo app name', firebase.notifications.Android.Importance.High)
