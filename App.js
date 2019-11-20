@@ -7,8 +7,10 @@
  */
 
 import React, { Component } from 'react';
+import { TextInput, Button } from 'react-native';
 import { Platform, StyleSheet, Text, View, Alert, AsyncStorage } from 'react-native';
 import firebase from 'react-native-firebase';
+import axios from "axios";
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -71,26 +73,7 @@ export default class App extends Component<Props> {
     * Triggered when a particular notification has been received in foreground
     * */
     this.notificationListener = firebase.notifications().onNotification((notification) => {
-      const { title, body } = notification;
       console.log('onNotification:');
-
-      // const localNotification = new firebase.notifications.Notification({
-      //   sound: 'sampleaudio',
-      //   show_in_foreground: true,
-      // })
-      //   .setSound('sampleaudio.wav')
-      //   .setNotificationId(notification.notificationId)
-      //   .setTitle(notification.title)
-      //   .setBody(notification.body)
-      //   .android.setChannelId('fcm_FirebaseNotifiction_default_channel') // e.g. the id you chose above
-      //   .android.setSmallIcon('@drawable/ic_launcher') // create this icon in Android Studio
-      //   .android.setColor('#000000') // you can set a color here
-      //   .android.setPriority(firebase.notifications.Android.Priority.High);
-
-      // firebase.notifications()
-      //   .displayNotification(localNotification)
-      //   .catch(err => console.error(err));
-
       
       const notificationTest = new firebase.notifications.Notification()
       .setNotificationId(notification._notificationId)
@@ -145,16 +128,36 @@ export default class App extends Component<Props> {
     });
   }
 
+  state ={
+    cep: "",
+    logradouro: ""
+  }
+
+  handlerCep = (text) => {
+    this.state.cep = text
+  }  
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
+
+        <TextInput style={{ width: 200, borderColor: 'gray', borderWidth: 1 }} keyboardType="number-pad" placeholder='CEP' value={this.state.cep} onChangeText={(text) => this.setState({cep:text})}/>
+        <Button title="Procurar cep" onPress={() => {
+          GET(this.state).then(res => {
+            console.log(res.data)
+            // notify()
+          })
+        }} />
+
       </View>
     );
   }
+
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -174,5 +177,15 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+function GET(state) {
+  let x = `https://viacep.com.br/ws/${state.cep}/json/`
+  console.log(x)
+  
+  return axios({
+    url: x,
+    method: "GET"
+  })
+}
 
 
